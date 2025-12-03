@@ -238,7 +238,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">My Website</a>
+      <a class="navbar-brand" href="index.html">Matias Shedden</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -246,7 +246,7 @@ $(document).ready(function () {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="about.html">About</a>
+  <a href="teaching.html">Teaching</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -280,7 +280,7 @@ in boundary settings.</p>
 <ul>
 <li><p>On 11/20/25, I gave a theoretical talk in the UF Student Seminar
 Series. The abstract is given below, and the slides can be found
-HERE.</p>
+<a href="files/presentation.html" target="_blank">here</a></p>
 <div
 style="background-color: #f7f7f7; padding: 15px; border-radius: 5px; color: #555555; border-left: 5px solid #007bff;">
 <p style="font-style: italic;">
@@ -307,13 +307,26 @@ distributional results, and a potential application of such a method to
 situations involving nuisance parameters.
 </p>
 </div></li>
-<li><p>My work with Dr. Ekvall began with developmental work on the
-<code>R</code> package <code>limestest</code>. The package is integrated
-with <code>lme4</code> and implements uniform inference using
-likelihood-based statistics. In particular, the score statistic, which
-is valid even in boundary settings. The package is currently under
-development, and the GitHub can be found HERE.</p></li>
+<li><p>I’m currently working on implementing unconstrained or
+quasi-unconstrained estimators for nuisance parameters in linear mixed
+effects models (LMMs) in order to create confidence intervals for the
+covariance parameters which are uniformly asymptotically valid, even
+when the values of the nuisance parameters may be at or near the
+boundary. Methods are being implemented in the <code>R</code> package
+<code>limestest</code>, which is integrated with <code>lme4</code>. I am
+also working on the asymptotic theory and uniform results concerning the
+profile score statistic, both in general and in the special case of
+LMMs.</p></li>
+<li><p>I’ve done research concerning the asymptotics of test statistics
+under sequences of parameter values which may be approaching the
+boundary of the parameter set. We explore settings in which the
+assumptions about the likelihood function could be weakened, and justify
+the strengthened assumptions. Furthermore, a simple and general method
+for constructing confidence intervals which are uniformly asymptotically
+valid and do not rely on simulated quantile values is proposed. Paper is
+in progress.</p></li>
 </ul>
+<!-- * My work with Dr. Ekvall began with developmental work on the `R` package `limestest`. The package is integrated with `lme4` and implements uniform inference using likelihood-based statistics. In particular, the score statistic, which is valid even in boundary settings. The package is currently under development, and the GitHub can be found <a href="https://github.com/myproject" target="_blank">GitHub</a>. -->
 </div>
 
 
