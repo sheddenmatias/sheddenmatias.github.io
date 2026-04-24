@@ -1,370 +1,632 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ============================================================
+       EDIT: Change the browser tab title here
+       ============================================================ -->
+  <title>Matias Shedden</title>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+  <style>
+    /* ============================================================
+       COLOR PALETTE
+       Edit these four variables to retheme the entire site.
+       ============================================================ */
+    :root {
+      --yellow:  #FAE97D;   /* navbar background */
+      --gold:    #E6B253;   /* decorative circles */
+      --mauve:   #825164;   /* text box backgrounds */
+      --dark:    #421E2C;   /* small bullet circles */
+      --bg:      #E5DED3;   /* page background */
+    }
 
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      font-family: 'Avenir Next', 'Avenir', 'Century Gothic', 'Nunito', sans-serif;
+      background: var(--bg);
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
 
+    /* ============================================================
+       NAVBAR
+       ============================================================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--yellow);
+      border-bottom: 1.5px solid rgba(0, 0, 0, 0.12);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
 
-<title>Matias Shedden</title>
+    /* ---- EDIT: site name / logo text is in the HTML below ---- */
+    .nav-brand {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #1a1a1a;
+      text-decoration: none;
+      margin-right: auto;
+      cursor: pointer;
+    }
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
 
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+    /* ---- EDIT: page link labels are in the HTML below ---- */
+    .nav-links a {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      text-decoration: none;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
+    .nav-links a:hover  { background: rgba(0,0,0,0.07); }
+    .nav-links a.active { background: rgba(0,0,0,0.1);  font-weight: 600; }
 
+    /* ============================================================
+       PAGE VISIBILITY
+       ============================================================ */
+    .page         { display: none; }
+    .page.active  { display: block; }
 
+    /* ============================================================
+       SHARED: text box + bullet dot
+       ============================================================ */
+    .text-box {
+      background: var(--mauve);
+      color: #fff;
+      padding: 1.5rem 1.75rem;
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
 
+    .text-box a {
+      color: #fff;
+      text-decoration: underline;
+    }
 
+    .bullet-dot {
+      flex: 0 0 68px;
+      height: 68px;
+      background: var(--dark);
+      border-radius: 50%;
+    }
 
+    /* ============================================================
+       PAGE 1 — NAME / TITLE HEADER
+       ============================================================ */
+    .page-header {
+      text-align: center;
+      padding: 3.5rem 2rem 2.5rem;
+    }
 
+    .header-gif {
+      position: absolute;
+      top: 24rem;
+      right: 2rem;
+      width: 230px;   /* EDIT: adjust gif size here */
+      height: auto;
+    }
 
+    .page-header h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      letter-spacing: 0.01em;
+    }
 
+    .page-header h2 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-top: 0.4rem;
+    }
 
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
-</style>
+    .page-header hr {
+      border: none;
+      border-top: 1.5px solid rgba(0, 0, 0, 0.18);
+      margin-top: 2rem;
+    }
 
+    /* ============================================================
+       SHARED: section heading (Recent Work, Teaching, Resources)
+       ============================================================ */
+    .section-heading {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+    }
 
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
+    /* ============================================================
+       PAGE 1 — HERO SECTION
+       ============================================================ */
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5rem;
+      padding: 5rem 6rem 6rem;
+    }
 
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
+    /* Left column: image with gold circle behind */
+    .hero-left {
+      position: relative;
+      flex: 0 0 auto;
+      z-index: 1;
+    }
 
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      width: 310px;
+      height: 310px;
+      background: var(--gold);
+      border-radius: 50%;
+      /* shifts the circle down-right so it peeks behind the image */
+      top: 55%;
+      left: 35%;
+      transform: translate(-20%, -45%);
+      z-index: 0;
+    }
 
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
+    /*
+      IMAGE PLACEHOLDER
+      Replace the <div class="hero-image-placeholder"> in the HTML with:
+        <img src="your-image.jpg" alt="Description" class="hero-img">
+      and add this rule in a <style> block or here:
+        .hero-img { width: 250px; height: 300px; object-fit: cover; position: relative; z-index: 1; }
+    */
+    .hero-image-placeholder {
+      position: relative;
+      z-index: 1;
+      width: 250px;
+      height: 300px;
+      background: #a8a8a8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.2rem;
+    }
 
-<!-- tabsets -->
+    /* Right column: text box */
+    .hero-text-box {
+      flex: 0 1 560px;
+      min-height: 240px;
+      z-index: 1;
+    }
 
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
+    /* ============================================================
+       PAGE 1 — DIVIDER
+       ============================================================ */
+    .section-divider {
+      border: none;
+      border-top: 1.5px solid rgba(0, 0, 0, 0.18);
+    }
 
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
+    /* ============================================================
+       SHARED: LIST ROWS SECTION (used by pages 1 & 2)
+       ============================================================ */
+    .list-section {
+      position: relative;
+      padding: 4rem 5rem 6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
-  border: none;
-}
+    .list-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
 
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
+    .list-row .text-box {
+      flex: 1;
+      min-height: 210px;
+    }
 
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
+    /* Absolutely-positioned decorative circles within .list-section */
+    .deco {
+      position: absolute;
+      background: var(--gold);
+      border-radius: 50%;
+      z-index: 0;
+    }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
+    /* ============================================================
+       PAGE 1 — decorative circle positions
+       (right-edge and left-edge, like the mockup)
+       ============================================================ */
+    #page1 .deco-1 { width: 340px; height: 340px; right: -120px; top:  -40px; }
+    #page1 .deco-2 { width: 320px; height: 320px; right: -100px; top:  490px; }
+    #page1 .deco-3 { width: 360px; height: 360px; left: -120px;  bottom: -80px; }
 
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
+    /* ============================================================
+       PAGE 2 — decorative circle positions
+       (centered between rows, like the mockup)
+       ============================================================ */
+    #page2 .deco-1 { width: 330px; height: 330px; left: 50%; transform: translateX(-50%); top:  320px; }
+    #page2 .deco-2 { width: 330px; height: 330px; left: 50%; transform: translateX(-50%); top:  700px; }
+    #page2 .deco-3 { width: 370px; height: 370px; left: 50%; transform: translateX(-50%); top: 1060px; }
 
-<!-- code folding -->
+    /* ============================================================
+       PAGE 3 — LARGE CIRCLES
+       ============================================================ */
+    .circles-section {
+      padding: 4rem 2rem 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+    }
 
+    .big-circle {
+      width:  min(480px, 80vw);
+      height: min(480px, 80vw);
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #1a1a1a;
+    }
 
+    .big-circle a {
+      color: #1a1a1a;
+      text-decoration: underline;
+    }
 
+    /* ============================================================
+       RESPONSIVE — stack vertically on small screens
+       ============================================================ */
+    @media (max-width: 720px) {
+      nav {
+        padding: 1rem 1.25rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .nav-links { gap: 0.75rem; }
+      .nav-links a { font-size: 0.9rem; padding: 0.25rem 0.5rem; }
 
+      .hero {
+        flex-direction: column;
+        padding: 3rem 1.5rem 4rem;
+        gap: 2rem;
+        align-items: flex-start;
+      }
+      .hero-left::before { width: 220px; height: 220px; }
+      .hero-image-placeholder { width: 200px; height: 240px; }
+      .hero-text-box { flex: 1 1 auto; width: 100%; min-height: 160px; }
+      .hero-deco { display: none; }
+
+      .list-section { padding: 3rem 1.25rem 4rem; gap: 2.5rem; }
+      .bullet-dot { flex: 0 0 48px; height: 48px; }
+      .list-row .text-box { min-height: 140px; font-size: 1rem; }
+
+      /* hide deco circles on mobile so they don't crowd small screens */
+      .deco { display: none; }
+
+      .circles-section { padding: 3rem 1.25rem 4rem; gap: 3rem; }
+      .big-circle { font-size: 1rem; padding: 2rem; }
+    }
+  </style>
 </head>
-
 <body>
 
+<!-- ============================================================
+     NAVBAR
+     EDIT: site brand name, and the three page link labels below.
+     ============================================================ -->
+<nav>
+  <span class="nav-brand" onclick="showPage('page1')">
+    <!-- EDIT: your site name or logo -->
+    Matias Shedden
+  </span>
+  <ul class="nav-links">
+    <li><a id="nav-page1" class="active" onclick="showPage('page1')">Home</a></li>
+    <li><a id="nav-page2"               onclick="showPage('page2')">Teaching</a></li>
+    <li><a id="nav-page3"               onclick="showPage('page3')">Resources</a></li>
+  </ul>
+</nav>
 
-<div class="container-fluid main-container">
 
+<!-- ============================================================
+     PAGE 1
+     ============================================================ -->
+<section id="page1" class="page active">
 
+  <!-- - - - - - - - - NAME / TITLE HEADER - - - - - - - - -->
+  <div class="page-header">
+    <!--
+      PAGE 1 · NAME & TITLE
+      EDIT: Replace the text inside the tags below.
+    -->
+    <h1>Matias Shedden</h1>
+    <h2><a href="https://stat.ufl.edu" target="_blank" >Statistics</a> PhD Student, <a href="https://www.ufl.edu" target="_blank">University of Florida</a></h2>
+    <hr>
 
+    <img src="images/animation.gif" alt="qq-plot animation" class="header-gif">
+  </div>
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Matias Shedden</a>
+  <!-- - - - - - - - - HERO ROW - - - - - - - - -->
+  <div class="hero">
+
+    <!-- Left: image -->
+    <div class="hero-left">
+      <!--
+        IMAGE — Replace this placeholder div with your image:
+          <img src="your-photo.jpg" alt="Your description"
+               style="width:250px;height:300px;object-fit:cover;position:relative;z-index:1;">
+      -->
+      <img src="images/profile.jpg" alt="Profile Picture"
+               style="width:250px;height:300px;object-fit:cover;position:relative;z-index:1;">         
+      <!-- <div class="hero-image-placeholder">Image</div> -->
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="teaching.html">Teaching</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
 
-<div id="header">
+    <!-- Right: text / link box -->
+    <div class="hero-text-box text-box">
+      <!--
+        PAGE 1 · HERO TEXT
+        Replace the placeholder text below. You can add paragraphs, links, etc.:
+          <p>Your intro text here.</p>
+          <p><a href="https://example.com">A link</a></p>
+      -->
+      <p>I’m Matias Shedden, a 4th year PhD student in Statistics at the
+      University of Florida, being advised by Dr. Karl Oskar Ekvall.
+      My research centers on inference in boundary settings, particularly
+      within asymptotic likelihood theory and in applications to linear mixed
+      effects models, time series, and the analysis of genetic data. </p>
+      <p><a href="files/mshedden_cv_2025.pdf" target="_blank">View my CV
+      here.</a></p>
+      <p><strong>Contact</strong>: <a href="mailto:sheddenmatias@ufl.edu"
+      class="email">sheddenmatias@ufl.edu</a></p>
+      <p><a href="https://github.com/sheddenmatias" target = "_blank"> <strong>Github</strong> </a></p>
+    </div>
+
+  </div>
+
+  <!-- - - - - - - - - LIST ROWS - - - - - - - - -->
+  <div class="list-section">
+
+    <!-- Decorative background circles -->
+    <div class="deco deco-1"></div>
+    <div class="deco deco-2"></div>
+    <div class="deco deco-3"></div>
+
+    <!-- EDIT: section heading -->
+    <h2 class="section-heading">Recent Work</h2>
+
+    <!-- Row 1 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        <p>On 11/20/25, I gave a talk on my research in the UF Student Seminar Series. The slides can be found <a href="files/presentation.html" target="_blank">here</a>. </p>
+        <div style="background-color: #f7f7f7; padding: 15px; border-radius: 5px; color: #555555; border-left: 5px solid #421e2c;">
+        <p style="font-style: italic;">
+        Abstract: Uniform inference refers to the process of constructing
+        confidence intervals or hypothesis tests which are uniformly
+        asymptotically valid on compact subsets of the parameter space. Uniform
+        results generally follow from distributional results when the parameters
+        of the distribution are allowed to depend on <span
+        class="math inline">\(n\)</span>. We consider the asymptotic
+        distributions of the Wald and Likelihood Ratio statistics “near” the
+        boundary, in the sense that the sequence of parameters is potentially
+        approaching a boundary point. The assumptions required to produce such
+        distributional results under sequences are stronger than those required
+        when the parameter is fixed. In particular, when the sequence converges
+        fast enough, weaker assumptions involving Local Asymptotic Normality
+        (LAN) around the limit point are sufficient for producing distributional
+        results. Slow rates of convergence require additional assumptions.
+        Consideration of an exactly quadratic likelihood shows that these
+        additional assumptions, as always, ensure that the likelihood function
+        is approximated by a quadratic in a way that yields the desired
+        distributional results. We suggest a simple method for constructing
+        uniformly asymptotically valid confidence intervals based on these
+        distributional results, and a potential application of such a method to
+        situations involving nuisance parameters.
+        </p>
+      </div>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        <p>We have a paper in preparation: </p>
+        <p>M. Shedden and K.O. Ekvall. “Reliable score-based confidence intervals for covariance parameters in linear mixed models”</p>
+        <p>In addition to the paper, methods are being implemented in the <code>R</code> package <a href="https://github.com/koekvall/reconf"> <code>reconf</code> </a>, which is integrated with <code>lme4</code>. </p>
+
+        <div style="background-color: #f7f7f7; padding: 15px; border-radius: 5px; color: #555555; border-left: 5px solid #421e2c;">
+        <p style="font-style: italic;">
+        Abstract: Uniform inference refers to the process of constructing confidence intervals
+         or hypothesis tests which are uniformly asymptotically valid on compact subsets of the parameter
+          space. Uniform results generally follow from distributional results established under a sequence 
+          of parameter values <span class="math inline">\( \theta_n \)</span>. We establish such distributional results for the profile score statistic, 
+          evaluated at an unrestricted maximum of the nuisance parameters. We then consider confidence intervals 
+          constructed by inverting the profile score statistic, and show that these confidence intervals 
+          can be shown to be uniformly asymptotically valid under certain conditions, which we discuss 
+          in the case of Linear Mixed Effects models. In particular, our proposed confidence intervals 
+          are valid even when the true value of the parameters, including the nuisance parameters, may 
+          be at or near the boundary of the parameter set. This provides a reliable method for constructing 
+          confidence intervals for a single parameter value, and is particularly valuable when estimates for 
+          the parameter values are highly correlated, and we discuss such applications.
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        <p>I’m doing research concerning the asymptotics of test statistics
+        under sequences of parameter values which may be approaching the
+        boundary of the parameter set. We explore settings in which the
+        assumptions about the likelihood function could be weakened, and justify
+        the strengthened assumptions. Furthermore, a simple and general method
+        for constructing confidence intervals which are uniformly asymptotically
+        valid and do not rely on simulated quantile values is proposed. Paper is
+        in progress.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 
+<!-- ============================================================
+     PAGE 2
+     ============================================================ -->
+<section id="page2" class="page">
 
-<h1 class="title toc-ignore">Matias Shedden</h1>
+  <div class="list-section" style="padding-top: 5rem;">
+    
+    <!-- EDIT: section heading -->
+    <h2 class="section-heading">Teaching</h2>
 
+    <p class="section-intro">I have been teaching courses as the principle instructor at UF since
+    Summer 2023.</p>
+
+    <!-- Decorative background circles (centered between rows) -->
+    <!--
+    
+    <div class="deco deco-1"></div>
+    <div class="deco deco-2"></div>
+    <div class="deco deco-3"></div>
+
+    -->
+
+    <!-- Row 1 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        <div id="course-instructor" class="section level2">
+        <h2>Course Instructor</h2>
+        <ul>
+        <li>Spring 2026: STA 4322 - Introduction to Statistics Theory</li>
+        <li>Fall 2025: STA 3032 - Engineering Statistics</li>
+        <li>Fall 2024: STA 4322 - Introduction to Statistics Theory</li>
+        <li>Spring 2024: STA 3100 - Introduction to Programming in R</li>
+        <li>Fall 2023: STA 3032 - Engineering Statistics</li>
+        <li>Summer 2023: STA 3100 - Introduction to Programming in R</li>
+        </ul>
+        </div>
 </div>
+      </div>
+    </div>
 
+    <!-- Row 2 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
 
-<p><img src="images/profile.JPG" style="width:30.0%" /></p>
-<p>Welcome to my website!</p>
-<div id="bio" class="section level3">
-<h3>Bio</h3>
-<p>I’m Matias Shedden, a 4th year PhD student in Statistics at the
-University of Florida, currently being advised by Dr. Karl Oskar Ekvall.
-My research interests include asymptotic likelihood theory and inference
-in boundary settings.</p>
-<p><a href="files/mshedden_cv_2025.pdf" target="_blank">View my CV
-here.</a></p>
-<p><strong>Contact</strong>: <a href="mailto:sheddenmatias@ufl.edu"
-class="email">sheddenmatias@ufl.edu</a></p>
-</div>
-<div id="recent-work" class="section level3">
-<h3>Recent Work</h3>
+        <div id="teaching-assistant" class="section level2">
+<h2>Teaching Assistant</h2>
 <ul>
-<li><p>On 11/20/25, I gave a theoretical talk in the UF Student Seminar
-Series. The abstract is given below, and the slides can be found
-<a href="files/presentation.html" target="_blank">here</a></p>
-<div
-style="background-color: #f7f7f7; padding: 15px; border-radius: 5px; color: #555555; border-left: 5px solid #007bff;">
-<p style="font-style: italic;">
-Abstract: Uniform inference refers to the process of constructing
-confidence intervals or hypothesis tests which are uniformly
-asymptotically valid on compact subsets of the parameter space. Uniform
-results generally follow from distributional results when the parameters
-of the distribution are allowed to depend on <span
-class="math inline">\(n\)</span>. We consider the asymptotic
-distributions of the Wald and Likelihood Ratio statistics “near” the
-boundary, in the sense that the sequence of parameters is potentially
-approaching a boundary point. The assumptions required to produce such
-distributional results under sequences are stronger than those required
-when the parameter is fixed. In particular, when the sequence converges
-fast enough, weaker assumptions involving Local Asymptotic Normality
-(LAN) around the limit point are sufficient for producing distributional
-results. Slow rates of convergence require additional assumptions.
-Consideration of an exactly quadratic likelihood shows that these
-additional assumptions, as always, ensure that the likelihood function
-is approximated by a quadratic in a way that yields the desired
-distributional results. We suggest a simple method for constructing
-uniformly asymptotically valid confidence intervals based on these
-distributional results, and a potential application of such a method to
-situations involving nuisance parameters.
-</p>
-</div></li>
-<li><p>I’m currently working on implementing unconstrained or
-quasi-unconstrained estimators for nuisance parameters in linear mixed
-effects models (LMMs) in order to create confidence intervals for the
-covariance parameters which are uniformly asymptotically valid, even
-when the values of the nuisance parameters may be at or near the
-boundary. Methods are being implemented in the <code>R</code> package
-<code>limestest</code>, which is integrated with <code>lme4</code>. I am
-also working on the asymptotic theory and uniform results concerning the
-profile score statistic, both in general and in the special case of
-LMMs.</p></li>
-<li><p>I’ve done research concerning the asymptotics of test statistics
-under sequences of parameter values which may be approaching the
-boundary of the parameter set. We explore settings in which the
-assumptions about the likelihood function could be weakened, and justify
-the strengthened assumptions. Furthermore, a simple and general method
-for constructing confidence intervals which are uniformly asymptotically
-valid and do not rely on simulated quantile values is proposed. Paper is
-in progress.</p></li>
+<li>Summer 2024: STA 3032 - Engineering Statistics</li>
+<li>Spring 2023: STA 3100 - Introduction to Programming in R</li>
+<li>Fall 2022: STA 3100 - Introduction to Programming in R</li>
 </ul>
-<!-- * My work with Dr. Ekvall began with developmental work on the `R` package `limestest`. The package is integrated with `lme4` and implements uniform inference using likelihood-based statistics. In particular, the score statistic, which is valid even in boundary settings. The package is currently under development, and the GitHub can be found <a href="https://github.com/myproject" target="_blank">GitHub</a>. -->
-</div>
+
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        
+        <div id="course-materials" class="section level2">
+        <h2>Course Materials</h2>
+        <p>My complete course notes for STA 3032 in book form can be found
+        <a href="files/Book.pdf" target="_blank">here</a>.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
 
 
+<!-- ============================================================
+     PAGE 3
+     ============================================================ -->
+<section id="page3" class="page">
+
+  <div class="circles-section">
+
+    <!-- EDIT: section heading -->
+    <h2 class="section-heading">Resources</h2>
+
+    <!-- Circle 1 -->
+    <div class="big-circle">
+      <!--
+        PAGE 3 · CIRCLE 1
+        Add your text or HTML here, e.g.:
+          <div>
+            <p>Your content.</p>
+            <p><a href="https://example.com">A link</a></p>
+          </div>
+      -->
+    </div>
+
+    <!-- Circle 2 -->
+    <div class="big-circle">
+      <!--
+        PAGE 3 · CIRCLE 2
+      -->
+    </div>
+
+    <!-- Circle 3 -->
+    <div class="big-circle">
+      <!--
+        PAGE 3 · CIRCLE 3
+      -->
+    </div>
+
+  </div>
+</section>
 
 
-</div>
-
+<!-- ============================================================
+     PAGE NAVIGATION SCRIPT
+     ============================================================ -->
 <script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 </script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
