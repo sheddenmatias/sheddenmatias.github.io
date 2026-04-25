@@ -157,6 +157,10 @@
       margin-bottom: 0.5rem;
     }
 
+    #page2 .section-heading {
+      text-align: center;
+    }
+
     /* 
        PAGE 1 — HERO SECTION
         */
@@ -337,6 +341,9 @@
       #page2 .bullet-dot { display: none; }
       #page2 .list-row .text-box { width: 100%; }
 
+      #page3 .bullet-dot { display: none; }
+      #page3 .list-row .text-box { width: 100%; }
+
       /* hide deco circles on mobile so they don't crowd small screens */
       .deco { display: none; }
 
@@ -358,7 +365,7 @@
   <ul class="nav-links">
     <li><a id="nav-page1" class="active" onclick="showPage('page1')">Home</a></li>
     <li><a id="nav-page2"               onclick="showPage('page2')">Teaching</a></li>
-    <li><a id="nav-page3"               onclick="showPage('page3')">Briefs</a></li>
+    <li><a id="nav-page3"               onclick="showPage('page3')">Research Updates</a></li>
   </ul>
 </nav>
 
@@ -508,9 +515,6 @@
     <!-- EDIT: section heading -->
     <h2 class="section-heading">Teaching</h2>
 
-    <p class="section-intro">I have been teaching courses as the principle instructor at UF since
-    Summer 2023.</p>
-
     <!-- Decorative background circles (centered between rows) -->
 
     <!-- Row 1 -->
@@ -570,9 +574,9 @@
   <div class="circles-section">
 
     <!-- EDIT: section heading -->
-    <h2 class="section-heading">Briefs</h2>
+    <h2 class="section-heading">Research Updates</h2>
 
-    <!-- Circle 1 -->
+    <!--
     <div class="big-circle">
             <h3>4/25/26</h3>
             <p>While teaching STA 4322, I covered likelihood asymptotics from the perspective
@@ -584,8 +588,40 @@
             </p>
             <p>See the lecture (and references therein) <a href="files/quadratic_likelihood.pdf" target="_blank">here</a>.</p>
     </div>
+    -->
 
-    <!-- Circle 2 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        <h3>4/25/26</h3>
+            <p>While teaching STA 4322, I covered likelihood asymptotics from the perspective
+              of Geyer, C. J. (2013). This simple version of the topics covered in that paper
+              presented at the undergraduate level, as well as a connection to the more usual
+              "n going to infinity" perspective that is usually presented.
+               Its a much more intuitive way (in my opinion) of understanding these topics that
+               isn't often used, and it doesn't require a CLT!
+            </p>
+            <p>See the lecture (and references therein) <a href="files/quadratic_likelihood.pdf" target="_blank">here</a>.</p>
+      </div>
+    </div>
+
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        <h3>4/21/26</h3>
+            <p>I gave a presentation in STA 7934 (High-Dimensional Time Series, taught
+              by Dr. Sayar Karmakar), in which
+              I found a very interesting overlap between my own research (uniform inference and parameters on the boundary)
+              and the central
+              theme of the class, VAR models. The main reference 
+              is Holberg, C. and Ditlevsen, S. (2025). I also draw some analogies to more usual
+              boundary settings and do some analysis using a likelihood ratio test.
+            </p>
+            <p>See the presentation (and references therein) <a href="files/Uniform Inference in VAR Models.pdf" target="_blank">here</a>.</p>
+      </div>
+    </div>
+
+    <!--
     <div class="big-circle">
             <h3>4/21/26</h3>
             <p>I gave a presentation in STA 7934 (High-Dimensional Time Series, taught
@@ -597,6 +633,7 @@
             </p>
             <p>See the presentation (and references therein) <a href="files/quadratic_likelihood.pdf" target="_blank">here</a>.</p>
     </div>
+    -->
 
     <!-- Circle 3 -->
     <div class="big-circle">
