@@ -293,8 +293,8 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 3rem;
-      font-size: 1rem;
+      padding: clamp(1.5rem, 10vw, 3rem);  /* shrinks with the circle */
+      font-size: clamp(0.8rem, 3vw, 1.25rem); /* shrinks with the circle */
       line-height: 1.6;
       color: #1a1a1a;
     }
