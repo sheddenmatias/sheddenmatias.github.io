@@ -3,16 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- ============================================================
-       EDIT: Change the browser tab title here
-       ============================================================ -->
+  <!-- Browser tab title here -->
   <title>Matias Shedden</title>
 
   <style>
-    /* ============================================================
-       COLOR PALETTE
-       Edit these four variables to retheme the entire site.
-       ============================================================ */
+    /* COLOR PALETTE */
     :root {
       --yellow:  #FAE97D;   /* navbar background */
       --gold:    #E6B253;   /* decorative circles */
@@ -21,9 +16,9 @@
       --bg:      #E5DED3;   /* page background */
     }
 
-    /* ============================================================
+    /* 
        RESET & BASE
-       ============================================================ */
+        */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -33,9 +28,9 @@
       min-height: 100vh;
     }
 
-    /* ============================================================
+    /* 
        NAVBAR
-       ============================================================ */
+        */
     nav {
       position: sticky;
       top: 0;
@@ -79,15 +74,15 @@
     .nav-links a:hover  { background: rgba(0,0,0,0.07); }
     .nav-links a.active { background: rgba(0,0,0,0.1);  font-weight: 600; }
 
-    /* ============================================================
+    /* 
        PAGE VISIBILITY
-       ============================================================ */
+        */
     .page         { display: none; }
     .page.active  { display: block; }
 
-    /* ============================================================
+    /* 
        SHARED: text box + bullet dot
-       ============================================================ */
+        */
     .text-box {
       background: var(--mauve);
       color: #fff;
@@ -108,9 +103,9 @@
       border-radius: 50%;
     }
 
-    /* ============================================================
+    /* 
        PAGE 1 — NAME / TITLE HEADER
-       ============================================================ */
+        */
     .page-header {
       text-align: center;
       padding: 3.5rem 2rem 2.5rem;
@@ -152,9 +147,9 @@
       margin-top: 2rem;
     }
 
-    /* ============================================================
+    /* 
        SHARED: section heading (Recent Work, Teaching, Resources)
-       ============================================================ */
+        */
     .section-heading {
       font-size: 1.6rem;
       font-weight: 600;
@@ -162,9 +157,9 @@
       margin-bottom: 0.5rem;
     }
 
-    /* ============================================================
+    /* 
        PAGE 1 — HERO SECTION
-       ============================================================ */
+        */
     .hero {
       position: relative;
       display: flex;
@@ -222,17 +217,17 @@
       z-index: 1;
     }
 
-    /* ============================================================
+    /* 
        PAGE 1 — DIVIDER
-       ============================================================ */
+        */
     .section-divider {
       border: none;
       border-top: 1.5px solid rgba(0, 0, 0, 0.18);
     }
 
-    /* ============================================================
+    /* 
        SHARED: LIST ROWS SECTION (used by pages 1 & 2)
-       ============================================================ */
+        */
     .list-section {
       position: relative;
       padding: 4rem 5rem 6rem;
@@ -262,25 +257,25 @@
       z-index: 0;
     }
 
-    /* ============================================================
+    /* 
        PAGE 1 — decorative circle positions
        (right-edge and left-edge, like the mockup)
-       ============================================================ */
+        */
     #page1 .deco-1 { width: 340px; height: 340px; right: -120px; top:  -40px; }
     #page1 .deco-2 { width: 320px; height: 320px; right: -100px; top:  490px; }
     #page1 .deco-3 { width: 360px; height: 360px; left: -120px;  bottom: -80px; }
 
-    /* ============================================================
+    /* 
        PAGE 2 — decorative circle positions
        (centered between rows, like the mockup)
-       ============================================================ */
+        */
     #page2 .deco-1 { width: 330px; height: 330px; left: 50%; transform: translateX(-50%); top:  320px; }
     #page2 .deco-2 { width: 330px; height: 330px; left: 50%; transform: translateX(-50%); top:  700px; }
     #page2 .deco-3 { width: 370px; height: 370px; left: 50%; transform: translateX(-50%); top: 1060px; }
 
-    /* ============================================================
+    /* 
        PAGE 3 — LARGE CIRCLES
-       ============================================================ */
+        */
     .circles-section {
       padding: 4rem 2rem 6rem;
       display: flex;
@@ -299,7 +294,7 @@
       justify-content: center;
       text-align: center;
       padding: 3rem;
-      font-size: 1.25rem;
+      font-size: 1rem;
       line-height: 1.6;
       color: #1a1a1a;
     }
@@ -309,9 +304,9 @@
       text-decoration: underline;
     }
 
-    /* ============================================================
+    /* 
        RESPONSIVE — stack vertically on small screens
-       ============================================================ */
+        */
     @media (max-width: 720px) {
       nav {
         padding: 1rem 1.25rem;
@@ -335,6 +330,12 @@
       .list-section { padding: 3rem 1.25rem 4rem; gap: 2.5rem; }
       .bullet-dot { flex: 0 0 48px; height: 48px; }
       .list-row .text-box { min-height: 140px; font-size: 1rem; }
+      
+      #page1 .bullet-dot { display: none; }
+      #page1 .list-row .text-box { width: 100%; }
+
+      #page2 .bullet-dot { display: none; }
+      #page2 .list-row .text-box { width: 100%; }
 
       /* hide deco circles on mobile so they don't crowd small screens */
       .deco { display: none; }
@@ -346,10 +347,10 @@
 </head>
 <body>
 
-<!-- ============================================================
+<!-- 
      NAVBAR
      EDIT: site brand name, and the three page link labels below.
-     ============================================================ -->
+      -->
 <nav>
   <span class="nav-brand" onclick="showPage('page1')">
     <!-- EDIT: your site name or logo -->
@@ -358,14 +359,14 @@
   <ul class="nav-links">
     <li><a id="nav-page1" class="active" onclick="showPage('page1')">Home</a></li>
     <li><a id="nav-page2"               onclick="showPage('page2')">Teaching</a></li>
-    <li><a id="nav-page3"               onclick="showPage('page3')">Resources</a></li>
+    <li><a id="nav-page3"               onclick="showPage('page3')">Briefs</a></li>
   </ul>
 </nav>
 
 
-<!-- ============================================================
+<!-- 
      PAGE 1
-     ============================================================ -->
+      -->
 <section id="page1" class="page active">
 
   <!-- - - - - - - - - NAME / TITLE HEADER - - - - - - - - -->
@@ -378,7 +379,6 @@
     <h2>Statistics PhD Student, <a href="https://www.stat.ufl.edu" target="_blank">University of Florida</a></h2>
     <hr>
 
-    <img src="images/animation.gif" alt="qq-plot animation" class="header-gif">
   </div>
 
   <!-- - - - - - - - - HERO ROW - - - - - - - - -->
@@ -386,24 +386,12 @@
 
     <!-- Left: image -->
     <div class="hero-left">
-      <!--
-        IMAGE — Replace this placeholder div with your image:
-          <img src="your-photo.jpg" alt="Your description"
-               style="width:250px;height:300px;object-fit:cover;position:relative;z-index:1;">
-      -->
       <img src="images/profile.JPG" alt="Profile Picture"
                style="width:250px;height:300px;object-fit:cover;position:relative;z-index:1;">         
-      <!-- <div class="hero-image-placeholder">Image</div> -->
     </div>
 
     <!-- Right: text / link box -->
     <div class="hero-text-box text-box">
-      <!--
-        PAGE 1 · HERO TEXT
-        Replace the placeholder text below. You can add paragraphs, links, etc.:
-          <p>Your intro text here.</p>
-          <p><a href="https://example.com">A link</a></p>
-      -->
       <p>I’m Matias Shedden, a 4th year PhD student in Statistics at the
       University of Florida, being advised by Dr. Karl Oskar Ekvall.
       My research centers on inference in boundary settings, particularly
@@ -413,6 +401,11 @@
       <p><a href="https://github.com/sheddenmatias" target = "_blank"> View my Github </a></p>
       <p><strong>Contact</strong>: <a href="mailto:sheddenmatias@ufl.edu"
       class="email">sheddenmatias@ufl.edu</a></p>
+    </div>
+
+    <div class= "header-left">
+      <img src="images/animation.gif" alt="qq-plot animation"
+              style="width:200px;height:200px;object-fit:cover;position:relative;z-index:1;">
     </div>
 
   </div>
@@ -506,13 +499,13 @@
 </section>
 
 
-<!-- ============================================================
+<!-- 
      PAGE 2
-     ============================================================ -->
+      -->
 <section id="page2" class="page">
 
   <div class="list-section" style="padding-top: 5rem;">
-    
+
     <!-- EDIT: section heading -->
     <h2 class="section-heading">Teaching</h2>
 
@@ -520,20 +513,12 @@
     Summer 2023.</p>
 
     <!-- Decorative background circles (centered between rows) -->
-    <!--
-    
-    <div class="deco deco-1"></div>
-    <div class="deco deco-2"></div>
-    <div class="deco deco-3"></div>
-
-    -->
 
     <!-- Row 1 -->
     <div class="list-row">
       <div class="bullet-dot"></div>
       <div class="text-box">
-        <div id="course-instructor" class="section level2">
-        <h2>Course Instructor</h2>
+        <h3>Course Instructor</h3>
         <ul>
         <li>Spring 2026: STA 4322 - Introduction to Statistics Theory</li>
         <li>Fall 2025: STA 3032 - Engineering Statistics</li>
@@ -542,8 +527,6 @@
         <li>Fall 2023: STA 3032 - Engineering Statistics</li>
         <li>Summer 2023: STA 3100 - Introduction to Programming in R</li>
         </ul>
-        </div>
-</div>
       </div>
     </div>
 
@@ -551,15 +534,15 @@
     <div class="list-row">
       <div class="bullet-dot"></div>
       <div class="text-box">
-
-        <div id="teaching-assistant" class="section level2">
-<h2>Teaching Assistant</h2>
-<ul>
-<li>Summer 2024: STA 3032 - Engineering Statistics</li>
-<li>Spring 2023: STA 3100 - Introduction to Programming in R</li>
-<li>Fall 2022: STA 3100 - Introduction to Programming in R</li>
-</ul>
-
+        <!--
+          PAGE 2 · LIST ITEM 2
+        -->
+        <h3>Teaching Assistant</h3>
+        <ul>
+        <li>Summer 2024: STA 3032 - Engineering Statistics</li>
+        <li>Spring 2023: STA 3100 - Introduction to Programming in R</li>
+        <li>Fall 2022: STA 3100 - Introduction to Programming in R</li>
+        </ul>
       </div>
     </div>
 
@@ -567,13 +550,12 @@
     <div class="list-row">
       <div class="bullet-dot"></div>
       <div class="text-box">
-        
-        <div id="course-materials" class="section level2">
-        <h2>Course Materials</h2>
+        <!--
+          PAGE 2 · LIST ITEM 3
+        -->
+        <h3>Course Materials</h3>
         <p>My complete course notes for STA 3032 in book form can be found
         <a href="files/Book.pdf" target="_blank">here</a>.</p>
-        </div>
-
       </div>
     </div>
 
@@ -581,26 +563,29 @@
 </section>
 
 
-<!-- ============================================================
+<!-- 
      PAGE 3
-     ============================================================ -->
+      -->
 <section id="page3" class="page">
 
   <div class="circles-section">
 
     <!-- EDIT: section heading -->
-    <h2 class="section-heading">Resources</h2>
+    <h2 class="section-heading">Briefs</h2>
 
     <!-- Circle 1 -->
     <div class="big-circle">
-      <!--
-        PAGE 3 · CIRCLE 1
-        Add your text or HTML here, e.g.:
           <div>
-            <p>Your content.</p>
-            <p><a href="https://example.com">A link</a></p>
+            <h3>4/25/26</h3>
+            <p>While teaching STA 4322, I covered likelihood asymptotics from the perspective
+              of Geyer, C. J. (2013). This simple version of the topics covered in that paper
+              presented at the undergraduate level, as well as a connection to the more usual
+              "n going to infinity" perspective that is usually presented.
+               Its a much more intuitive way (in my opinion) of understanding these topics that
+               isn't often used, and it doesn't require a CLT!
+            </p>
+            <p>See the lecture (and references therein) <a href="files/quadratic_likelihood.pdf" target="_blank">here</a>.</p>
           </div>
-      -->
     </div>
 
     <!-- Circle 2 -->
@@ -621,9 +606,9 @@
 </section>
 
 
-<!-- ============================================================
+<!-- 
      PAGE NAVIGATION SCRIPT
-     ============================================================ -->
+      -->
 <script>
   function showPage(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
