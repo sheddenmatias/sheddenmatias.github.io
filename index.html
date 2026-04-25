@@ -308,6 +308,36 @@
       text-decoration: underline;
     }
 
+        .big-circle.clickable {
+      cursor: pointer;
+      transition: filter 0.18s, transform 0.18s;
+    }
+
+    .big-circle.clickable:hover {
+      filter: brightness(0.93);
+      transform: scale(1.02);
+    }
+
+    /* Back button for sub-pages */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      margin-bottom: 1rem;
+      opacity: 0.6;
+      transition: opacity 0.15s;
+    }
+
+    .back-button:hover { opacity: 1; }
+
     /* 
        RESPONSIVE — stack vertically on small screens
         */
@@ -636,15 +666,49 @@
     -->
 
     <!-- Circle 3 -->
-    <div class="big-circle">
-      <!--
-        PAGE 3 · CIRCLE 3
-      -->
+    <div class="big-circle clickable" onclick = "showPage('page4')">
+      <h2> Older Updates </h2>
     </div>
 
   </div>
 </section>
 
+<section id="page4" class="page">
+
+  <div class="list-section" style="padding-top: 4rem;">
+
+    <!-- Back button -->
+    <button class="back-button" onclick="showPage('page3')">← Back to Resources</button>
+
+    <!-- EDIT: heading -->
+    <h2 class="section-heading">Older Updates</h2>
+
+    <!-- Row 1 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        <!-- Item 1 -->
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        <!-- Item 2 -->
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="list-row">
+      <div class="bullet-dot"></div>
+      <div class="text-box">
+        <!-- Item 3 -->
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- 
      PAGE NAVIGATION SCRIPT
@@ -655,6 +719,9 @@
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     document.getElementById('nav-' + id).classList.add('active');
+    // only highlight nav link if one exists for this page
+    const navLink = document.getElementById('nav-' + id);
+    if (navLink) navLink.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
