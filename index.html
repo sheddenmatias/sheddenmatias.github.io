@@ -16,9 +16,7 @@
       --bg:      #E5DED3;   /* page background */
     }
 
-    /* 
-       RESET & BASE
-        */
+    /* RESET & BASE */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -28,9 +26,7 @@
       min-height: 100vh;
     }
 
-    /* 
-       NAVBAR
-        */
+    /* NAVBAR */
     nav {
       position: sticky;
       top: 0;
@@ -74,15 +70,11 @@
     .nav-links a:hover  { background: rgba(0,0,0,0.07); }
     .nav-links a.active { background: rgba(0,0,0,0.1);  font-weight: 600; }
 
-    /* 
-       PAGE VISIBILITY
-        */
+    /* PAGE VISIBILITY */
     .page         { display: none; }
     .page.active  { display: block; }
 
-    /* 
-       SHARED: text box + bullet dot
-        */
+    /* SHARED: text box + bullet dot */
     .text-box {
       background: var(--mauve);
       color: #fff;
@@ -103,9 +95,7 @@
       border-radius: 50%;
     }
 
-    /* 
-       PAGE 1 — NAME / TITLE HEADER
-        */
+    /* PAGE 1 — NAME / TITLE HEADER */
     .page-header {
       text-align: center;
       padding: 3.5rem 2rem 2.5rem;
@@ -147,9 +137,7 @@
       margin-top: 2rem;
     }
 
-    /* 
-       SHARED: section heading (Recent Work, Teaching, Resources)
-        */
+    /* SHARED: section heading (Recent Work, Teaching, Resources) */
     .section-heading {
       font-size: 1.6rem;
       font-weight: 600;
@@ -161,9 +149,7 @@
       text-align: center;
     }
 
-    /* 
-       PAGE 1 — HERO SECTION
-        */
+    /* PAGE 1 — HERO SECTION */
     .hero {
       position: relative;
       display: flex;
@@ -194,26 +180,6 @@
       z-index: 0;
     }
 
-    /*
-      IMAGE PLACEHOLDER
-      Replace the <div class="hero-image-placeholder"> in the HTML with:
-        <img src="your-image.jpg" alt="Description" class="hero-img">
-      and add this rule in a <style> block or here:
-        .hero-img { width: 250px; height: 300px; object-fit: cover; position: relative; z-index: 1; }
-    */
-    .hero-image-placeholder {
-      position: relative;
-      z-index: 1;
-      width: 250px;
-      height: 300px;
-      background: #a8a8a8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1.2rem;
-    }
-
     /* Right column: text box */
     .hero-text-box {
       flex: 0 1 560px;
@@ -229,9 +195,7 @@
       border-top: 1.5px solid rgba(0, 0, 0, 0.18);
     }
 
-    /* 
-       SHARED: LIST ROWS SECTION (used by pages 1 & 2)
-        */
+    /*  SHARED: LIST ROWS SECTION (used by pages 1 & 2) */
     .list-section {
       position: relative;
       padding: 4rem 5rem 6rem;
@@ -261,25 +225,19 @@
       z-index: 0;
     }
 
-    /* 
-       PAGE 1 — decorative circle positions
-       (right-edge and left-edge, like the mockup)
-        */
+    /* PAGE 1 — decorative circle positions
+       (right-edge and left-edge, like the mockup) */
     #page1 .deco-1 { width: 340px; height: 340px; right: -120px; top:  -40px; }
     #page1 .deco-2 { width: 320px; height: 320px; right: -100px; top:  490px; }
     #page1 .deco-3 { width: 360px; height: 360px; left: -120px;  bottom: -80px; }
 
-    /* 
-       PAGE 2 — decorative circle positions
-       (centered between rows, like the mockup)
-        */
+    /* PAGE 2 — decorative circle positions
+       (centered between rows, like the mockup) */
     #page2 .deco-1 { width: 330px; height: 330px; left: 50%; transform: translateX(-50%); top:  320px; }
     #page2 .deco-2 { width: 330px; height: 330px; left: 50%; transform: translateX(-50%); top:  700px; }
     #page2 .deco-3 { width: 370px; height: 370px; left: 50%; transform: translateX(-50%); top: 1060px; }
 
-    /* 
-       PAGE 3 — LARGE CIRCLES
-        */
+    /* PAGE 3 — LARGE CIRCLES */
     .circles-section {
       padding: 4rem 2rem 6rem;
       display: flex;
@@ -338,9 +296,7 @@
 
     .back-button:hover { opacity: 1; }
 
-    /* 
-       RESPONSIVE — stack vertically on small screens
-        */
+    /* RESPONSIVE — stack vertically on small screens */
     @media (max-width: 720px) {
       nav {
         padding: 1rem 1.25rem;
@@ -357,7 +313,6 @@
         align-items: flex-start;
       }
       .hero-left::before { width: 220px; height: 220px; }
-      .hero-image-placeholder { width: 200px; height: 240px; }
       .hero-text-box { flex: 1 1 auto; width: 100%; min-height: 160px; }
       .hero-deco { display: none; }
 
@@ -365,14 +320,9 @@
       .bullet-dot { flex: 0 0 48px; height: 48px; }
       .list-row .text-box { min-height: 140px; font-size: 1rem; }
       
-      #page1 .bullet-dot { display: none; }
-      #page1 .list-row .text-box { width: 100%; }
-
-      #page2 .bullet-dot { display: none; }
-      #page2 .list-row .text-box { width: 100%; }
-
-      #page3 .bullet-dot { display: none; }
-      #page3 .list-row .text-box { width: 100%; }
+      /* bullet-dot hides on small screens */
+      .bullet-dot { display: none; }
+      .list-row .text-box { width: 100%; }
 
       /* hide deco circles on mobile so they don't crowd small screens */
       .deco { display: none; }
@@ -383,13 +333,11 @@
 </head>
 <body>
 
-<!-- 
-     NAVBAR
-     EDIT: site brand name, and the three page link labels below.
-      -->
+<!-- NAVBAR
+     EDIT: site name, and the three page link labels below. -->
 <nav>
   <span class="nav-brand" onclick="showPage('page1')">
-    <!-- EDIT: your site name or logo -->
+    <!-- site name or image -->
     Matias Shedden
   </span>
   <ul class="nav-links">
@@ -400,12 +348,10 @@
 </nav>
 
 
-<!-- 
-     PAGE 1
-      -->
+<!-- PAGE 1 -->
 <section id="page1" class="page active">
 
-  <!-- - - - - - - - - NAME / TITLE HEADER - - - - - - - - -->
+  <!-- NAME / TITLE HEADER -->
   <div class="page-header">
     <!--
       PAGE 1 · NAME & TITLE
@@ -417,7 +363,7 @@
 
   </div>
 
-  <!-- - - - - - - - - HERO ROW - - - - - - - - -->
+  <!-- HERO ROW -->
   <div class="hero">
 
     <!-- Left: image -->
@@ -446,7 +392,7 @@
 
   </div>
 
-  <!-- - - - - - - - - LIST ROWS - - - - - - - - -->
+  <!--LIST ROWS -->
   <div class="list-section">
 
     <!-- Decorative background circles -->
