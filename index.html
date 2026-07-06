@@ -1,413 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Browser tab title here -->
-  <title>Matias Shedden</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matias Shedden</title>
+<style>
+  /* ============================================================
+     COLOR SCHEMES
+     Each scheme defines: bar/text color, background color,
+     date color, and decorative-circle color.
+     Edit these three blocks (or add more) to change the palette
+     options that the sidebar cycles through on click.
+     ============================================================ */
+  :root{
+    --bar-text-color: #0e6f76;
+    --bg-color: #fffdf2;
+    --date-color: #0e6f76;
+    --circle-color: #e2e2e2;
 
-  <style>
-    /* COLOR PALETTE */
-    :root {
-      --yellow:  #FAE97D;   /* navbar background */
-      --gold:    #E6B253;   /* decorative circles */
-      --mauve:   #825164;   /* text box backgrounds */
-      --dark:    #421E2C;   /* small bullet circles */
-      --bg: #FAFAFA;
-      /*--bg:      #E5DED3;   /* page background */
-    }
+    --body-text-color: #222;
+    --sidebar-width: 44px;
+    --sidebar-width-hover: 68px;
+  }
 
-    /* RESET & BASE */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; }
 
-    body {
-      font-family: 'Avenir Next', 'Avenir', 'Century Gothic', 'Nunito', sans-serif;
-      background: var(--bg);
-      color: #1a1a1a;
-      min-height: 100vh;
-    }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--bg-color);
+    color: var(--body-text-color);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    transition: background-color .4s ease;
+  }
 
-    /* NAVBAR */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      background: var(--yellow);
-      border-bottom: 1.5px solid rgba(0, 0, 0, 0.12);
-      padding: 1.25rem 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
+  .app {
+    display: flex;
+    min-height: 100vh;
+  }
 
-    /* ---- EDIT: site name / logo text is in the HTML below ---- */
-    .nav-brand {
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: #1a1a1a;
-      text-decoration: none;
-      margin-right: auto;
-      cursor: pointer;
-    }
+  /* ---------------- Sidebar ---------------- */
+  .sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bar-text-color);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: width .25s ease, opacity .25s ease;
+  }
+  .sidebar:hover {
+    width: var(--sidebar-width-hover);
+    opacity: 0.6;
+  }
 
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
+  .content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    padding: 40px 5%;
+  }
 
-    /* ---- EDIT: page link labels are in the HTML below ---- */
-    .nav-links a {
-      font-size: 1rem;
-      font-weight: 400;
-      color: #1a1a1a;
-      text-decoration: none;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.18s;
-    }
+  .content-inner {
+    width: 100%;
+    max-width: 620px;
+  }
 
-    .nav-links a:hover  { background: rgba(0,0,0,0.07); }
-    .nav-links a.active { background: rgba(0,0,0,0.1);  font-weight: 600; }
+  /* ---------------- Navbar ---------------- */
+  .navbar {
+    display: flex;
+    align-items: baseline;
+    gap: 22px;
+    margin-bottom: 40px;
+  }
 
-    /* PAGE VISIBILITY */
-    .page         { display: none; }
-    .page.active  { display: block; }
+  .logo-name {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: var(--bar-text-color);
+  }
 
-    /* SHARED: text box + bullet dot */
-    .text-box {
-      background: var(--mauve);
-      color: #fff;
-      padding: 1.5rem 1.75rem;
-      font-size: 1.2rem;
-      line-height: 1.6;
-    }
+  .navbar nav {
+    display: flex;
+    gap: 22px;
+  }
 
-    .text-box a {
-      color: #fff;
-      text-decoration: underline;
-    }
+  .nav-link {
+    font-family: inherit;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    color: #444;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity .25s ease;
+  }
 
-    .bullet-dot {
-      flex: 0 0 68px;
-      height: 68px;
-      background: var(--dark);
-      border-radius: 50%;
-    }
+  /* when a tab is active, dim the others */
+  .navbar.tab-selected .nav-link:not(.active) {
+    opacity: 0.35;
+  }
+  .nav-link.active {
+    font-weight: bold;
+  }
 
-    /* PAGE 1 — NAME / TITLE HEADER */
-    .page-header {
-      text-align: center;
-      padding: 3.5rem 2rem 2.5rem;
-    }
+  /* ---------------- Pages ---------------- */
+  .page { display: none; }
+  .page.active-page { display: block; }
 
-    .header-gif {
-      position: absolute;
-      top: 24rem;
-      right: 2rem;
-      width: 230px;   /* EDIT: adjust gif size here */
-      height: auto;
-    }
+  /* ---------------- Home page layout ---------------- */
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 190px 70px;
+    column-gap: 18px;
+    align-items: start;
+  }
 
-    @media (max-width: 720px) {
-      .header-gif {
-        position: static;
-        display: block;
-        margin: 1.25rem auto 0;
-      }
-    }
+  .text-box {
+    padding: 6px 0;
+    line-height: 1.5;
+  }
 
-    .page-header h1 {
-      font-size: 2.6rem;
-      font-weight: 600;
-      color: #1a1a1a;
-      letter-spacing: 0.01em;
-    }
+  /* image + decorative circle */
+  .image-wrap {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .page-header h2 {
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: #1a1a1a;
-      margin-top: 0.4rem;
-    }
+  .decorative-circle {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-color: var(--circle-color);
+    transition: background-color .4s ease;
+  }
 
-    .page-header hr {
-      border: none;
-      border-top: 1.5px solid rgba(0, 0, 0, 0.18);
-      margin-top: 2rem;
-    }
+  .cycling-image {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform .3s ease, opacity .3s ease;
+  }
 
-    /* SHARED: section heading (Recent Work, Teaching, Resources) */
-    .section-heading {
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: #1a1a1a;
-      margin-bottom: 0.5rem;
-    }
+  .cycling-image:hover {
+    transform: scale(1.15);
+    opacity: 0.75;
+  }
 
-    #page2 .section-heading {
-      text-align: center;
-    }
+  .logo-column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
 
-    /* PAGE 1 — HERO SECTION */
-    .hero {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5rem;
-      padding: 5rem 6rem 6rem;
-    }
+  .logo-image {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--circle-color);
+    color: #fff;
+    font-size: 0.45rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .3s ease, opacity .3s ease;
+  }
 
-    /* Left column: image with gold circle behind */
-    .hero-left {
-      position: relative;
-      flex: 0 0 auto;
-      z-index: 1;
-    }
+  .logo-image:hover {
+    transform: scale(1.15);
+    opacity: 0.75;
+  }
 
-    .hero-left::before {
-      content: '';
-      position: absolute;
-      width: 310px;
-      height: 310px;
-      background: var(--gold);
-      border-radius: 50%;
-      /* shifts the circle down-right so it peeks behind the image */
-      top: 55%;
-      left: 35%;
-      transform: translate(-20%, -45%);
-      z-index: 0;
-    }
+  .logo-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 
-    /* Right column: text box */
-    .hero-text-box {
-      flex: 0 1 560px;
-      min-height: 240px;
-      z-index: 1;
-    }
+  /* ---------------- News section ---------------- */
+  .news {
+    margin-top: 50px;
+    grid-column: 1 / -1;
+  }
+  .news h3 {
+    margin-bottom: 10px;
+  }
+  .news-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 4px 0;
+  }
+  .news-date {
+    color: var(--date-color);
+    width: 110px;
+    flex-shrink: 0;
+    transition: color .4s ease;
+  }
+  .news-row .text-box {
+    padding: 0;
+    flex: 1;
+  }
 
-    /* 
-       PAGE 1 — DIVIDER
-        */
-    .section-divider {
-      border: none;
-      border-top: 1.5px solid rgba(0, 0, 0, 0.18);
-    }
-
-    /*  SHARED: LIST ROWS SECTION (used by pages 1 & 2) */
-    .list-section {
-      position: relative;
-      padding: 4rem 5rem 6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-    }
-
-    .list-row {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: flex-start;
-      gap: 2rem;
-    }
-
-    .list-row .text-box {
-      flex: 1;
-      min-height: 210px;
-    }
-
-    /* Absolutely-positioned decorative circles within .list-section */
-    .deco {
-      position: absolute;
-      background: var(--gold);
-      border-radius: 50%;
-      z-index: 0;
-    }
-
-    /* PAGE 1 — decorative circle positions
-       (right-edge and left-edge, like the mockup) */
-    #page1 .deco-1 { width: 340px; height: 340px; right: -120px; top:  -40px; }
-    #page1 .deco-2 { width: 320px; height: 320px; right: -100px; top:  490px; }
-    #page1 .deco-3 { width: 360px; height: 360px; left: -120px;  bottom: -80px; }
-
-    /* PAGE 2 — decorative circle positions
-       (centered between rows, like the mockup) */
-    #page2 .deco-1 { width: 330px; height: 330px; left: 50%; transform: translateX(-50%); top:  320px; }
-    #page2 .deco-2 { width: 330px; height: 330px; left: 50%; transform: translateX(-50%); top:  700px; }
-    #page2 .deco-3 { width: 370px; height: 370px; left: 50%; transform: translateX(-50%); top: 1060px; }
-
-    /* PAGE 3 — LARGE CIRCLES */
-    .circles-section {
-      padding: 4rem 2rem 6rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4rem;
-    }
-
-    .big-circle {
-      width:  min(600px, 80vw);
-      height: min(600px, 80vw);
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: clamp(1.5rem, 10vw, 3rem);  /* shrinks with the circle */
-      font-size: clamp(0.8rem, 3vw, 1rem); /* shrinks with the circle */
-      line-height: 1.6;
-      color: #1a1a1a;
-    }
-
-    .big-circle a {
-      color: #1a1a1a;
-      text-decoration: underline;
-    }
-
-        .big-circle.clickable {
-      cursor: pointer;
-      transition: filter 0.18s, transform 0.18s;
-    }
-
-    .big-circle.clickable:hover {
-      filter: brightness(0.93);
-      transform: scale(1.02);
-    }
-
-    /* Back button for sub-pages */
-    .back-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: none;
-      border: none;
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #1a1a1a;
-      cursor: pointer;
-      padding: 0.3rem 0;
-      margin-bottom: 1rem;
-      opacity: 0.6;
-      transition: opacity 0.15s;
-    }
-
-    .back-button:hover { opacity: 1; }
-
-    /* RESPONSIVE — stack vertically on small screens */
-    @media (max-width: 720px) {
-      nav {
-        padding: 1rem 1.25rem;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-      }
-      .nav-links { gap: 0.75rem; }
-      .nav-links a { font-size: 0.9rem; padding: 0.25rem 0.5rem; }
-
-      .hero {
-        flex-direction: column;
-        padding: 3rem 1.5rem 4rem;
-        gap: 2rem;
-        align-items: flex-start;
-      }
-      .hero-left::before { width: 220px; height: 220px; }
-      .hero-text-box { flex: 1 1 auto; width: 100%; min-height: 160px; }
-      .hero-deco { display: none; }
-
-      .list-section { padding: 3rem 1.25rem 4rem; gap: 2.5rem; }
-      .bullet-dot { flex: 0 0 48px; height: 48px; }
-      .list-row .text-box { min-height: 140px; font-size: 1rem; }
-      
-      /* bullet-dot hides on small screens */
-      .bullet-dot { display: none; }
-      .list-row .text-box { width: 100%; }
-
-      /* hide deco circles on mobile so they don't crowd small screens */
-      .deco { display: none; }
-
-      .circles-section { padding: 3rem 1.25rem 4rem; gap: 3rem; }
-    }
-  </style>
+  /* ---------------- Generic sub-page ---------------- */
+  .subpage-text {
+    max-width: 700px;
+    line-height: 1.6;
+  }
+</style>
 </head>
 <body>
 
-<!-- NAVBAR
-     EDIT: site name, and the three page link labels below. -->
-<nav>
-  <span class="nav-brand" onclick="showPage('page1')">
-    <!-- site name or image -->
-    Matias Shedden
-  </span>
-  <ul class="nav-links">
-    <li><a id="nav-page1" class="active" onclick="showPage('page1')">Home</a></li>
-    <li><a id="nav-page2"               onclick="showPage('page2')">Teaching</a></li>
-    <li><a id="nav-page3"               onclick="showPage('page3')">Research Updates</a></li>
-  </ul>
-</nav>
+<div class="app">
+  <!-- Clicking the sidebar cycles through the 3 color schemes.
+       Hovering enlarges and dims it (see .sidebar:hover). -->
+  <aside class="sidebar" id="sidebar" title="Click to change color scheme"></aside>
 
+  <div class="content">
+   <div class="content-inner">
+    <header class="navbar" id="navbar">
+      <div class="logo-name">Matias Shedden</div>
+      <nav>
+        <a class="nav-link active" data-page="home">Home</a>
+        <a class="nav-link" data-page="research">Research</a>
+        <a class="nav-link" data-page="teaching">Teaching</a>
+        <a class="nav-link" data-page="more">More</a>
+      </nav>
+    </header>
 
-<!-- PAGE 1 -->
-<section id="page1" class="page active">
-
-  <!-- NAME / TITLE HEADER -->
-  <div class="page-header">
-    <!--
-      PAGE 1 · NAME & TITLE
-      EDIT: Replace the text inside the tags below.
-    -->
-    <h1>Matias Shedden</h1>
-    <h2>Statistics PhD Student, <a href="https://www.stat.ufl.edu" target="_blank">University of Florida</a></h2>
-    <hr>
-
-  </div>
-
-  <!-- HERO ROW -->
-  <div class="hero">
-
-    <!-- Left: image -->
-    <div class="hero-left">
-      <img src="images/profile.JPG" alt="Profile Picture"
-               style="width:250px;height:300px;object-fit:cover;position:relative;z-index:1;">         
-    </div>
-
-    <!-- Right: text / link box -->
-    <div class="hero-text-box text-box">
-      <p>I’m Matias Shedden, a 4th year PhD student in Statistics at the
-      University of Florida, being advised by Dr. Karl Oskar Ekvall.
+    <main>
+      <!-- ================= HOME PAGE ================= -->
+      <section class="page active-page" id="page-home">
+        <div class="home-grid">
+          <div class="text-box">I’m Matias Shedden, a 5th year PhD candidate studying statistics at the
+      University of Florida, advised Dr. Karl Oskar Ekvall.
       My research centers on inference in boundary settings, particularly
       within asymptotic likelihood theory and in applications to linear mixed
-      effects models, time series, and the analysis of genetic data. </p>
-      <p><a href="files/mshedden_cv_2025.pdf" target="_blank">View my CV</a></p>
+      effects models, time series, and the analysis of genetic data.</div>
+
+          <div class="image-wrap">
+            <div class="decorative-circle"></div>
+            <img class="cycling-image" id="cyclingImage" src="" alt="Clickable image that cycles" title="Click to cycle images">
+          </div>
+
+          <div class="logo-column">
+            <a class="logo-image" href="#" target="_blank" rel="noopener">
+              <img src = "images/uf_logo.png" alt="uf logo">
+            </a>
+            <a class="logo-image" href="#" target="_blank" rel="noopener">
+              <img src = "images/moffitt_logo.png" alt="moffitt logo">
+            </a>
+          </div>
+
+          <div class="text-box" style="grid-column: 1 / 2;"> </p>
+      <p><a href="files/mshedden_cv_2025.pdf" target="_blank">View my CV</a> (last updated July 6, 2026)</p>
       <p><a href="https://github.com/sheddenmatias" target = "_blank"> View my Github </a></p>
       <p><strong>Contact</strong>: <a href="mailto:sheddenmatias@ufl.edu"
-      class="email">sheddenmatias@ufl.edu</a></p>
+      class="email">sheddenmatias@ufl.edu</a>
     </div>
+          <!--
+          <div class="text-box" style="grid-column: 1 / 2;">
+            
+            <ul>
+              <li>Text Box, bulleted list</li>
+            </ul>
+            
+          </div>
+          -->
 
-    <div class= "header-left">
-      <img src="images/animation.gif" alt="qq-plot animation"
-              style="width:200px;height:200px;object-fit:cover;position:relative;z-index:1;">
-    </div>
+          <div class="news">
+            <h3>News:</h3>
 
-  </div>
+            <div class="news-row">
+              <div class="news-date">June 26, 2026</div>
+              <div class="text-box">I passed the oral component of my
+                PhD qualifying exam and have officially advanced to PhD candidacy.
+              </div>
+            </div>
 
-  <!--LIST ROWS -->
-  <div class="list-section">
+            <div class="news-row">
+              <div class="news-date">June 9, 2026</div>
+              <div class="text-box">I am proud to have received the M. Clinton Miller, III Award for Best Student Poster at the SRCOS Summer Research Conference, 2026!</div>
+            </div>
 
-    <!-- Decorative background circles -->
-    <div class="deco deco-1"></div>
-    <div class="deco deco-2"></div>
-    <div class="deco deco-3"></div>
+            <div class="news-row">
+              <div class="news-date">June 1, 2026</div>
+              <div class="text-box">Today I began my work at Moffitt Cancer Center 
+                under the advisory of Dr. Vivien Yin!
+                <!--My work centers around subgroup
+                identification in interim analysis during clinical trials using causal
+                forests. -->
+              </div>
+            </div>
 
-    <!-- EDIT: section heading -->
-    <h2 class="section-heading">Recent Work</h2>
+            <div class="news-row">
+              <div class="news-date">May 5, 2026</div>
+              <div class="text-box">I recieved funding to attend the 2026 SRCOS
+                 Summer Research Conference through the Boyd Harshbarger Travel Award.</div>
+            </div>
 
-    <!-- Row 1 -->
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
+            <div class="news-row">
+              <div class="news-date">November 11, 2025</div>
+              <div class="text-box">I presented my research in the UF Statistics Student
+                Seminar Series.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= RESEARCH PAGE ================= -->
+      <section class="page" id="page-research">
+        <div class="subpage-text">
+          <h2>Research</h2>
+
+          <h4>Boundary Settings</h4>
+          
         <p>On 11/20/25, I gave a talk on my research in the UF Student Seminar Series. The slides can be found <a href="files/presentation.html" target="_blank">here</a>. </p>
         <div style="background-color: #f7f7f7; padding: 15px; border-radius: 5px; color: #555555; border-left: 5px solid #421e2c;">
         <p style="font-style: italic;">
@@ -433,14 +356,8 @@
         distributional results, and a potential application of such a method to
         situations involving nuisance parameters.
         </p>
-      </div>
-      </div>
-    </div>
+        </div>
 
-    <!-- Row 2 -->
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
         <p>We have a paper in preparation: </p>
         <p>M. Shedden and K.O. Ekvall. “Reliable score-based confidence intervals for covariance parameters in linear mixed models”</p>
         <p>In addition to the paper, methods are being implemented in the <code>R</code> package <a href="https://github.com/koekvall/reconf" target = "_blank"> <code>reconf</code> </a>, which is integrated with <code>lme4</code>. </p>
@@ -461,13 +378,7 @@
           the parameter values are highly correlated, and we discuss such applications.
         </p>
         </div>
-      </div>
-    </div>
 
-    <!-- Row 3 -->
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
         <p>I’m currently researching the asymptotics of test statistics
         under sequences of parameter values which may be approaching the
         boundary of the parameter set. We explore settings in which the
@@ -476,30 +387,25 @@
         for constructing confidence intervals which are uniformly asymptotically
         valid and do not rely on simulated quantile values is proposed. Paper is
         in progress.</p>
-      </div>
-    </div>
-  </div>
-</section>
+
+          <h4>Interim Analysis with Causal Forests</h4>
 
 
-<!-- 
-     PAGE 2
-      -->
-<section id="page2" class="page">
 
-  <div class="list-section" style="padding-top: 5rem;">
 
-    <!-- EDIT: section heading -->
-    <h2 class="section-heading">Teaching</h2>
 
-    <!-- Decorative background circles (centered between rows) -->
 
-    <!-- Row 1 -->
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
-        <h3>Course Instructor</h3>
+
+        </div>
+      </section>
+
+      <!-- ================= TEACHING PAGE ================= -->
+      <section class="page" id="page-teaching">
+        <div class="subpage-text">
+          <h2>Teaching</h2>
+          <h4>Course Instructor</h4>
         <ul>
+        <li>Fall 2026: STA 3100 - Introduction to Programming in R</li>
         <li>Spring 2026: STA 4322 - Introduction to Statistics Theory</li>
         <li>Fall 2025: STA 3032 - Engineering Statistics</li>
         <li>Fall 2024: STA 4322 - Introduction to Statistics Theory</li>
@@ -507,55 +413,27 @@
         <li>Fall 2023: STA 3032 - Engineering Statistics</li>
         <li>Summer 2023: STA 3100 - Introduction to Programming in R</li>
         </ul>
-      </div>
-    </div>
 
-    <!-- Row 2 -->
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
-        <!--
-          PAGE 2 · LIST ITEM 2
-        -->
-        <h3>Teaching Assistant</h3>
+          <h4>Teaching Assistant</h4>
         <ul>
         <li>Summer 2024: STA 3032 - Engineering Statistics</li>
         <li>Spring 2023: STA 3100 - Introduction to Programming in R</li>
         <li>Fall 2022: STA 3100 - Introduction to Programming in R</li>
         </ul>
-      </div>
-    </div>
 
-    <!-- Row 3 -->
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
-        <!--
-          PAGE 2 · LIST ITEM 3
-        -->
-        <h3>Course Materials</h3>
+          <h4> Course Materials </h4>
         <p>My complete course notes for STA 3032 in book form can be found
         <a href="files/Book.pdf" target="_blank">here</a>.</p>
-      </div>
-    </div>
 
-  </div>
-</section>
+        </div>
+      </section>
 
-
-<!-- 
-     PAGE 3
-      -->
-<section id="page3" class="page">
-
-  <div class="circles-section">
-
-    <!-- EDIT: section heading -->
-    <h2 class="section-heading">Research Updates</h2>
-
-    <!--
-    <div class="big-circle">
-            <h3>4/25/26</h3>
+      <!-- ================= MORE PAGE ================= -->
+      <section class="page" id="page-more">
+        <div class="subpage-text">
+          <h2>More</h2>
+          <h4>Likelihood Asymptotics Pedagogy</h4>
+          <h5>4/25/26</h5>
             <p>While teaching STA 4322, I covered likelihood asymptotics from the perspective
               of Geyer, C. J. (2013). This is a simple version of the topics covered in that paper,
               presented at the undergraduate level. It also includes the connection to the more usual
@@ -564,28 +442,9 @@
                isn't often used, and it doesn't require a CLT!
             </p>
             <p>See the lecture (and references therein) <a href="files/quadratic_likelihood.pdf" target="_blank">here</a>.</p>
-    </div>
-    -->
 
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
-        <h3>4/25/26</h3>
-            <p>While teaching STA 4322, I covered likelihood asymptotics from the perspective
-              of Geyer, C. J. (2013). This is a simple version of the topics covered in that paper,
-              presented at the undergraduate level. It also includes the connection to the more usual
-              "n going to infinity" perspective that is typically presented.
-               In my opinion, it's a much more intuitive way of understanding these topics that
-               isn't often used, and it doesn't require a CLT!
-            </p>
-            <p>See the lecture (and references therein) <a href="files/quadratic_likelihood.pdf" target="_blank">here</a>.</p>
-      </div>
-    </div>
-
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
-        <h3>4/21/26</h3>
+        <h4>Time Series</h4>
+        <h5>4/21/26</h5>
             <p>I gave a presentation in STA 7934 (High-Dimensional Time Series, taught
               by Dr. Sayar Karmakar), in which
               I found a very interesting overlap between my own research (uniform inference and parameters on the boundary)
@@ -595,93 +454,73 @@
               boundary settings and do some analysis using a likelihood ratio test.
             </p>
             <p>See the presentation (and references therein) <a href="files/Uniform Inference in VAR Models.pdf" target="_blank">here</a>.</p>
-      </div>
-    </div>
 
-    <!--
-    <div class="big-circle">
-            <h3>4/21/26</h3>
-            <p>I gave a presentation in STA 7934 (High-Dimensional Time Series, taught
-              by Dr. Sayar Karmakar), in which
-              I found a very interesting overlap between my own research and the central
-              theme of the class, VAR models! The main reference 
-              is Holberg, C. and Ditlevsen, S. (2025). I draw some analogies to more usual
-              boundary settings and do some analysis using a likelihood ratio test.
-            </p>
-            <p>See the presentation (and references therein) <a href="files/quadratic_likelihood.pdf" target="_blank">here</a>.</p>
-    </div>
-    -->
-
-    <!-- Circle 3 -->
-    <div class="big-circle clickable" onclick = "showPage('page4')">
-      <h2> Prior Updates </h2>
-    </div>
-
+        </div>
+      </section>
+    </main>
+   </div>
   </div>
-</section>
+</div>
 
-<section id="page4" class="page">
-
-  <div class="list-section" style="padding-top: 4rem;">
-
-    <!-- Back button -->
-    <button class="back-button" onclick="showPage('page3')">← Back to Resources</button>
-
-    <!-- EDIT: heading -->
-    <h2 class="section-heading">Prior Updates</h2>
-
-    <!-- Row 1 -->
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
-        <!-- Item 1 -->
-      </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
-        <!-- Item 2 -->
-      </div>
-    </div>
-
-    <!-- Row 3 -->
-    <div class="list-row">
-      <div class="bullet-dot"></div>
-      <div class="text-box">
-        <!-- Item 3 -->
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- 
-     PAGE NAVIGATION SCRIPT
-      -->
 <script>
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.getElementById('nav-' + id).classList.add('active');
-    // only highlight nav link if one exists for this page
-    const navLink = document.getElementById('nav-' + id);
-    if (navLink) navLink.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // ---------------- Navbar tab switching ----------------
+  const navbar = document.getElementById('navbar');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const pages = document.querySelectorAll('.page');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      navbar.classList.add('tab-selected');
+
+      const target = link.dataset.page;
+      pages.forEach(p => p.classList.toggle('active-page', p.id === 'page-' + target));
+    });
+  });
+
+  // ---------------- Cycling center image ----------------
+  const placeholderImages = [
+    "images/profile.jpg",
+    "images/animation.gif",
+    "images/pizza.png"
+  ];
+
+  let imageIndex = 0;
+  const cyclingImage = document.getElementById('cyclingImage');
+  cyclingImage.src = placeholderImages[imageIndex];
+
+  cyclingImage.addEventListener('click', () => {
+    imageIndex = (imageIndex + 1) % placeholderImages.length;
+    cyclingImage.style.opacity = 0;
+    setTimeout(() => {
+      cyclingImage.src = placeholderImages[imageIndex];
+      cyclingImage.style.opacity = 1;
+    }, 150);
+  });
+
+  // ---------------- Sidebar color scheme cycling ----------------
+  // bar/text color, background color, date color, decorative circle color.
+  const colorSchemes = [
+    { barText: '#0e6f76', bg: '#fffdf2', date: '#0e6f76', circle: '#e2e2e2' }, // scheme 1 (default, teal)
+    { barText: '#8a3b3b', bg: '#faf3e8', date: '#8a3b3b', circle: '#e6d8c3' }, // scheme 2 (warm/red)
+    { barText: '#2d3b6b', bg: '#f2f4fa', date: '#2d3b6b', circle: '#d6dcf0' }  // scheme 3 (cool/blue)
+  ];
+
+  let schemeIndex = 0;
+  const root = document.documentElement;
+
+  function applyScheme(scheme) {
+    root.style.setProperty('--bar-text-color', scheme.barText);
+    root.style.setProperty('--bg-color', scheme.bg);
+    root.style.setProperty('--date-color', scheme.date);
+    root.style.setProperty('--circle-color', scheme.circle);
   }
-</script>
 
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
+  document.getElementById('sidebar').addEventListener('click', () => {
+    schemeIndex = (schemeIndex + 1) % colorSchemes.length;
+    applyScheme(colorSchemes[schemeIndex]);
+  });
 </script>
 
 </body>
