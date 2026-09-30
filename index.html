@@ -45,14 +45,17 @@
   .sidebar {
     width: var(--sidebar-width);
     background-color: var(--bar-text-color);
-    cursor: pointer;
+    /* cursor: pointer;
     flex-shrink: 0;
     transition: width .25s ease, opacity .25s ease;
+    */
   }
+  /*
   .sidebar:hover {
     width: var(--sidebar-width-hover);
     opacity: 0.6;
   }
+  */
 
   .content {
     flex: 1;
@@ -139,6 +142,15 @@
     border-radius: 50%;
     background-color: var(--circle-color);
     transition: background-color .4s ease;
+  }
+
+
+
+  .regular-image {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
   }
 
   .cycling-image {
@@ -252,10 +264,17 @@
       within asymptotic likelihood theory and in applications to linear mixed
       effects models. <!--, time series, and the analysis of genetic data. -->
       In Biostatistics, my research centers on adaptive clinical trial design in oncology.</div>
-
+          
+          <!--
           <div class="image-wrap">
             <div class="decorative-circle"></div>
             <img class="cycling-image" id="cyclingImage" src="" alt="Clickable image that cycles" title="Click to cycle images">
+          </div>
+          -->
+
+          <div class="image-wrap">
+            <div class="decorative-circle"></div>
+            <img class="regular-image" src="images/profile.jpg">
           </div>
 
           <div class="logo-column">
@@ -490,7 +509,7 @@
               and the central
               theme of the class, VAR models. The main reference 
               is Holberg, C. and Ditlevsen, S. (2025). I also draw some analogies to more usual
-              boundary settings and do some analysis using a likelihood ratio test.
+              boundary settings and perform an analysis with a likelihood ratio test.
             </p>
             <p>See the presentation (and references therein) <a href="files/Uniform Inference in VAR Models.pdf" target="_blank">here</a>.</p>
 
