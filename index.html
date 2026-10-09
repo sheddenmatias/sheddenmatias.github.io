@@ -5,13 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Matias Shedden</title>
 <style>
-  /* ============================================================
-     COLOR SCHEMES
-     Each scheme defines: bar/text color, background color,
-     date color, and decorative-circle color.
-     Edit these three blocks (or add more) to change the palette
-     options that the sidebar cycles through on click.
-     ============================================================ */
+
   :root{
     --bar-text-color: #0e6f76;
     --bg-color: #fffdf2;
@@ -238,8 +232,7 @@
 <body>
 
 <div class="app">
-  <!-- Clicking the sidebar cycles through the 3 color schemes.
-       Hovering enlarges and dims it (see .sidebar:hover). -->
+  <!-- Clicking the sidebar cycles through the 3 color schemes. -->
   <aside class="sidebar" id="sidebar" title="Click to change color scheme"></aside>
 
   <div class="content">
@@ -304,6 +297,21 @@
 
           <div class="news">
             <h3>News:</h3>
+          
+            <div class="news-row">
+              <div class="news-date">Oct 6, 2026</div>
+              <div class="text-box"> I recieved a travel award to present at the
+            Conference for Statistical Foundations of AI (CSFAI) at UCSB on November 13-14th.
+              </div>
+            </div>
+
+            <div class="news-row">
+              <div class="news-date">Oct 3, 2026</div>
+              <div class="text-box">The paper "Score-based confidence 
+            intervals for variance-covariance parameters in linear mixed models" is now available
+            as a pre-print on <a href="https://arxiv.org/abs/2610.04181">arXiv</a>.
+              </div>
+            </div>
 
             <div class="news-row">
               <div class="news-date">June 26, 2026</div>
@@ -355,7 +363,10 @@
           <li><b>M. Shedden</b> and K. O. Ekvall (2026+). Score-based confidence 
             intervals for variance-covariance parameters in linear mixed models. 
             <br>
-            Link: Manuscript (coming soon). Link: Supplement (coming soon). Link: Code (coming soon).
+            Link: <a href="https://arxiv.org/abs/2610.04181">Manuscript</a>. 
+            <!-- Link: Supplement (coming soon). -->
+            Link: <a href="https://github.com/sheddenmatias/scoreconf-suppl">Supplement</a>.
+            Link: <a href="https://github.com/koekvall/reconf">R Package</a>.
           </li>
 
           <li><b>M. Shedden</b> and K. O. Ekvall (2026+). Profile score asymptotics
@@ -385,72 +396,6 @@
           </li>
 
           </ul>
-        
-        <!-- 
-          <h4>Boundary Settings</h4>
-          
-        <p>On 11/20/25, I gave a talk on my research in the UF Student Seminar Series. The slides can be found <a href="files/presentation.html" target="_blank">here</a>. </p>
-        <div style="background-color: #f7f7f7; padding: 15px; border-radius: 5px; color: #555555; border-left: 5px solid #421e2c;">
-        <p style="font-style: italic;">
-        Abstract: Uniform inference refers to the process of constructing
-        confidence intervals or hypothesis tests which are uniformly
-        asymptotically valid on compact subsets of the parameter space. Uniform
-        results generally follow from distributional results when the parameters
-        of the distribution are allowed to depend on <span
-        class="math inline">\(n\)</span>. We consider the asymptotic
-        distributions of the Wald and Likelihood Ratio statistics “near” the
-        boundary, in the sense that the sequence of parameters is potentially
-        approaching a boundary point. The assumptions required to produce such
-        distributional results under sequences are stronger than those required
-        when the parameter is fixed. In particular, when the sequence converges
-        fast enough, weaker assumptions involving Local Asymptotic Normality
-        (LAN) around the limit point are sufficient for producing distributional
-        results. Slow rates of convergence require additional assumptions.
-        Consideration of an exactly quadratic likelihood shows that these
-        additional assumptions, as always, ensure that the likelihood function
-        is approximated by a quadratic in a way that yields the desired
-        distributional results. We suggest a simple method for constructing
-        uniformly asymptotically valid confidence intervals based on these
-        distributional results, and a potential application of such a method to
-        situations involving nuisance parameters.
-        </p>
-        </div>
-
-        <p>We have a paper in preparation: </p>
-        <p>M. Shedden and K.O. Ekvall. “Reliable score-based confidence intervals for covariance parameters in linear mixed models”</p>
-        <p>In addition to the paper, methods are being implemented in the <code>R</code> package <a href="https://github.com/koekvall/reconf" target = "_blank"> <code>reconf</code> </a>, which is integrated with <code>lme4</code>. </p>
-
-        <div style="background-color: #f7f7f7; padding: 15px; border-radius: 5px; color: #555555; border-left: 5px solid #421e2c;">
-        <p style="font-style: italic;">
-        Abstract: Uniform inference refers to the process of constructing confidence intervals
-         or hypothesis tests which are uniformly asymptotically valid on compact subsets of the parameter
-          space. Uniform results generally follow from distributional results established under a sequence 
-          of parameter values <span class="math inline">\( \theta_n \)</span>. We establish such distributional results for the profile score statistic, 
-          evaluated at an unrestricted maximum of the nuisance parameters. We then consider confidence intervals 
-          constructed by inverting the profile score statistic, and show that these confidence intervals 
-          can be shown to be uniformly asymptotically valid under certain conditions, which we discuss 
-          in the case of Linear Mixed Effects models. In particular, our proposed confidence intervals 
-          are valid even when the true value of the parameters, including the nuisance parameters, may 
-          be at or near the boundary of the parameter set. This provides a reliable method for constructing 
-          confidence intervals for a single parameter value, and is particularly valuable when estimates for 
-          the parameter values are highly correlated, and we discuss such applications.
-        </p>
-        </div>
-
-        <p>I’m currently researching the asymptotics of test statistics
-        under sequences of parameter values which may be approaching the
-        boundary of the parameter set. We explore settings in which the
-        assumptions about the likelihood function could be weakened, and justify
-        the strengthened assumptions. Furthermore, a simple and general method
-        for constructing confidence intervals which are uniformly asymptotically
-        valid and do not rely on simulated quantile values is proposed. Paper is
-        in progress.</p>
-
-          <h4>Interim Analysis with Causal Forests</h4>
-
-        -->
-
-
 
 
 
